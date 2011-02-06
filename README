@@ -1,0 +1,42 @@
+This is a simple DOM based templating plugin for jQuery. 
+
+HTML:
+  <div id="person"></div>
+  
+  <div id="templates">
+    <div id="person_template">
+      <div class="name"></div>
+      <ul class="news-items">
+         <li><span class="date"></span><span class="description></span></li>
+      </ul>
+    </div>
+  </div>
+
+
+Javascript:
+
+
+  var objects = [
+    { date: "12/12/2012", description: "World ended." },
+    { date: "12/13/2012", description: "Nevermind." },
+  ];
+  
+  $("#person")
+    .template("initialize", "#person_template")
+    .template("replace", {
+        ".name": "Hortense Bartleswigmot",
+        "li": [ function(i, li, object) {
+                li.find(".date").html(object.date);
+                li.find(".description").html(object.description);
+               }, objects ]
+      });
+      
+      
+Result: 
+  <div id="person">
+      <div class="name">Hortense Bartleswigmot</div>
+      <ul class="news-items">
+         <li><span class="date">12/12/2012</span><span class="description>World ended.</span></li>
+         <li><span class="date">12/13/2012</span><span class="description>Nevermind.</span></li>
+      </ul>
+  </div>
